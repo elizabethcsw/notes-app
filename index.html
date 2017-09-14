@@ -1,11 +1,56 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <title>Note App</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
     <script src="note-model.js"></script>
     <script src="note-list-model.js"></script>
     <script src="note-list-view.js"></script>
+    <script src="note-controller.js"></script>
   </head>
+
   <body>
     <div id="app">Hello</div>
+    <script>
+    var notelist = new NoteList()
+    var notecontroller = new NoteController(notelist)
+    </script>
+
+    <!-- <button onclick="howdy()">Say Howdy</button> -->
+    <button onclick="notecontroller.insertHTML()">List Notes</button>
+
+    <!-- <div id="xx">Second Hello</div> -->
+
+
+    <button onclick="display('blue');">display blue</button>
+    <button onclick="display('red');">display red</button>
+
+
+    <p id="para">Some text here</p>
+    <button onclick="changeButton(this)">Click Me</button>
+    <button onclick="changeText()">Click Me Again</button>
+
+
+
+    <p>Click the following button and get alert</p>
+
+      <form>
+         <input type="button" onclick="sayHello()" value="Say Hello" />
+      </form>
+
+      <form method="POST" action="t.cgi" onsubmit="return validate()">
+         <input type="submit" value="Submit" />
+      </form>
+
+      <p>Bring your mouse inside the division to see the result:</p>
+      <div onmouseover="over()" onmouseout="out()">
+         <h2 id="bigtitle"> This is inside the division </h2>
+      </div>
+
+       <div>
+         <button id="time" onmouseover="showDate()" onmouseout="clearDate()">Show Date</button>
+       </div>
+
   </body>
 </html>
