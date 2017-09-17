@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Frontend, single page app</title>
+  </head>
+
+  <body>
+    <a href="" id="tiger-link">Tiger</a>
+    <div id="animal"></div>
+
+    <script>
+      makeTigerLinkClickSayTiger();
+
+      function makeTigerLinkClickSayTiger() {
+        document
+          .getElementById("tiger-link")
+          .addEventListener("click", function(clickEvent) {
+            clickEvent.preventDefault();
+            sayTiger();
+          });
+      };
+
+      function sayTiger() {
+        document
+          .getElementById("animal")
+          .innerHTML = "tiger";
+      };
+    </script>
+  </body>
+</html>
