@@ -18,20 +18,28 @@ function howdy(){
 
 (function(exports) {
   function NoteController(notelist) {
-    notelist.add(new Note("Favourite drink: beer"))
-    // console.log(notelist)
-    // console.log(notelist.list)
     this.notelistview = new NoteListView(notelist);
-    // console.log("Print notelistview.view: " + this.notelistview.view())
+    this.notelistview.noteList.add(new Note("Favourite drink: beer"))
+    this.notelistview.noteList.add(new Note("Watch Andrew Ng tutorial on machine learning"))
+
   };
     NoteController.prototype.insertHTML = function(doc = document) {
       var element = doc.getElementById('app');
-      // element.innerHTML = "great"
-      element.innerHTML = this.notelistview.view()
+      var notelistview = this.notelistview
+
+      element.innerHTML = notelistview.view()
+
+      window.onhashchange = function(){
+        var id = window.location.hash.split("#")[1].split("/")[1];
+        document
+          .getElementById("app")
+          .innerHTML = notelistview.noteList.list[id].readText();
+      };
+
       return element.innerHTML
-      // var testing = this.notelistview.view();
-      
     };
+
+
   exports.NoteController = NoteController;
 })(this);
 

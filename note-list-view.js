@@ -2,22 +2,26 @@
   function NoteListView(noteList) {
     this.noteList = noteList;
     this.stringpart = "";
-
-    // this.string = "";
   };
   NoteListView.prototype.view = function() {
     var stringpart = "";
     this.noteList.list.forEach(function(note){
-      // var stringpart = "";
-      stringpart+=("<li><div>" + note.text.slice(0,20) + "</div></li>");
+      stringpart+=("<li><div><a href='#notes/" + note.id + "'>" + note.text.slice(0,20) + "</a></div></li>");
     // console.log("inside forEach: " + stringpart)
   });
     // console.log("outside forEach: " + stringpart);
     return ("<ul>" + stringpart + "</ul>");
   };
+
+  NoteListView.prototype.giveNotelist = function () {
+    return this.noteList
+  };
+
   exports.NoteListView = NoteListView;
 })(this);
-//
+
+
+// <a href="#tiger">Tiger</a> <%= ; %>
 // note1 = new Note("hi");
 // note2 = new Note("ok");
 notelist = new NoteList();

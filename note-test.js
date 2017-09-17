@@ -33,9 +33,9 @@ var assert = {
 
 (function(exports) {
   function testNoteListViewObject() {
-    var noteList = { list:  [{text: "Favourite food: pesto"}, {text: "Favourite drink: seltzer"}]};
+    var noteList = { list:  [{text: "Favourite food: pesto", id:0}, {text: "Favourite drink: seltzer", id:1}]};
     var noteListView = new NoteListView(noteList);
-    assert.isTrue(noteListView.view() === "<ul><li><div>Favourite food: pest</div></li><li><div>Favourite drink: sel</div></li></ul>");
+    assert.isTrue(noteListView.view() === "<ul><li><div><a href='#notes/0'>Favourite food: pest</a></div></li><li><div><a href='#notes/1'>Favourite drink: sel</a></div></li></ul>");
   };
   testNoteListViewObject();
 })(this);
@@ -43,8 +43,10 @@ var assert = {
 (function(exports) {
   function testNoteController() {
     var notelist3 = new NoteList;
-    var notecontroller = new NoteController(notelist3);
-    assert.isTrue(notecontroller.notelistview.view() === "<ul><li><div>Favourite drink: bee</div></li></ul>");
+    // notelist3.add(new Note("Favourite drink: beer"))
+    var notecontroller1 = new NoteController(notelist3);
+    console.log(notecontroller1.notelistview.view())
+    assert.isTrue(notecontroller1.notelistview.view() === "<ul><li><div><a href='#notes/0'>Favourite drink: bee</a></div></li><li><div><a href='#notes/1'>Watch Andrew Ng tuto</a></div></li></ul>");
   };
   testNoteController();
 })(this);
@@ -80,7 +82,7 @@ var assert = {
     notecontroller.insertHTML(documentdouble)
     console.log("Here: "+documentdouble.getElementById('app').innerHTML)
 
-    assert.isTrue(documentdouble.getElementById('app').innerHTML === "<ul><li><div>Favourite drink: bee</div></li></ul>");
+    assert.isTrue(documentdouble.getElementById('app').innerHTML === "<ul><li><div><a href='#notes/0'>Favourite drink: bee</a></div></li><li><div><a href='#notes/1'>Watch Andrew Ng tuto</a></div></li></ul>");
   };
   testNoteController();
 })(this);
