@@ -5,7 +5,7 @@
 
 }
   SingleNoteView.prototype.view = function() {
-    this.fullnote = ("<div>" + this.note.text + "</div>");
+    this.fullnote = ("<br><div> Note: " + this.note.text + "</div>");
     return this.fullnote
   };
 

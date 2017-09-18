@@ -1,4 +1,5 @@
 
+
 function howdy(){
   var element = document.getElementById('app');
   element.innerHTML = "Howdy"
@@ -14,7 +15,32 @@ function howdy(){
 //   var element = document.getElementById('app');
 //   element.innerHTML = notelistview.view()
 // };
+(function(exports) {
+  function Listen(evt) {
+    evt.preventDefault();
+    console.log("first");
+    var newnote = document.getElementById('new').value;
+    notecontroller.notelistview.noteList.add(new Note(newnote));
+    // notecontroller.insertHTML(this)
+    document.getElementById('listnotes').value = 'Back';
+    document.getElementById('app').innerHTML = notecontroller.notelistview.view();
 
+
+    document.getElementById('new').value = ""
+    // document.getElementById('new').addEventListener('submit', function(evt){
+    // evt.preventDefault();
+    // console.log("inside")
+    // var newnote = document.getElementById('new').value
+    // notecontroller.notelistview.noteList.add(new Note(newnote))
+    // });
+    // var newnote = document.forms["myForm"]["newnote"].value
+
+    console.log("outside")
+  };
+
+
+  exports.Listen = Listen;
+})(this);
 
 (function(exports) {
   function NoteController(notelist) {
@@ -23,17 +49,42 @@ function howdy(){
     this.notelistview.noteList.add(new Note("Watch Andrew Ng tutorial on machine learning"))
 
   };
-    NoteController.prototype.insertHTML = function(doc = document) {
+    NoteController.prototype.insertHTML = function(anything, doc = document) {
       var element = doc.getElementById('app');
-      var notelistview = this.notelistview
+      var notelistview = this.notelistview;
 
-      element.innerHTML = notelistview.view()
+      if(anything.value == 'Back'){
+        anything.value = 'List Notes';
+        element.innerHTML = "";
+      }
+      else {
+        anything.value = 'Back';
+
+        console.log("Here1:" + location.hash)
+        if(location.hash.split("/")[0]==='#notes'){
+          console.log("Inside if")
+          location.hash = ""
+        } else {
+          console.log("Inside else")
+        }
+
+        console.log("Here2:" + location.pathname.split("notes-app/")[1])
+        console.log("Here3:" + location.hash)
+        element.innerHTML = notelistview.view();
+      }
+
+
+      // element.innerHTML = notelistview.view();
 
       window.onhashchange = function(){
-        var id = window.location.hash.split("#")[1].split("/")[1];
-        document
-          .getElementById("app")
-          .innerHTML = notelistview.noteList.list[id].readText();
+        if(location.hash!== ""){
+          var id = window.location.hash.split("#")[1].split("/")[1];
+          var singlenote = new SingleNoteView(notelistview.noteList.list[id])
+          document.getElementById("app").innerHTML = singlenote.view();
+          anything.value = 'List Notes';
+        }
+          // .innerHTML = notelistview.noteList.list[id].readText();
+
       };
 
       return element.innerHTML
@@ -89,7 +140,13 @@ function out() {
 };
 
 function changeButton(anything) {
-  anything.innerHTML = 'You';
+  if(anything.innerHTML == 'You'){
+    anything.innerHTML = 'Click Me';
+  }
+  else {
+    anything.innerHTML = 'You';
+  }
+
 }
 
 function changeText(){

@@ -13,18 +13,34 @@
   </head>
 
   <body>
-    <div id="app">Hello</div>
+    <div >Notes App</div><br>
+
+    <form onsubmit="return Listen(event)" id="text" name="myForm" action='/notes/new' method='post' >
+      <input id="new" type='' name='newnote' value=""required>
+      <input type='submit' value="Add Note">
+    </form><br>
+
+    <!-- <button onclick="(notecontroller).insertHTML(this)">List Notes</button><br> -->
+
+    <input id="listnotes" onclick="return (notecontroller).insertHTML(this)" type='submit' value="List Notes">
+
+    
+    <div id="app"></div>
+
     <script>
-    var notelist = new NoteList()
-    var notecontroller = new NoteController(notelist)
+    // var notelist = new NoteList()
+    var notecontroller = new NoteController(new NoteList())
     </script>
 
     <!-- <button onclick="howdy()">Say Howdy</button> -->
-    <button onclick="notecontroller.insertHTML()">List Notes</button>
-
-    <!-- <div id="xx">Second Hello</div> -->
 
 
+
+
+    <!-- <script>
+    var listen = new Listen()
+    </script> -->
+    <br>
     <button onclick="display('blue');">display blue</button>
     <button onclick="display('red');">display red</button>
 
